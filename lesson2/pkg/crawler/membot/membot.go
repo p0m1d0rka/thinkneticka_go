@@ -1,7 +1,7 @@
 package membot
 
 import (
-	"thinknetika_go/pkg/crawler"
+	"thinknetika_go/lesson2/pkg/crawler"
 )
 
 // Service - имитация служба поискового робота.

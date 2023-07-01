@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"strings"
-	"thinknetika_go/pkg/crawler/spider"
+	"thinknetika_go/lesson2/pkg/crawler/spider"
 )
 
 func main() {
