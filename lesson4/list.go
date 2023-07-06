@@ -16,6 +16,13 @@ type Elem struct {
 	next, prev *Elem
 }
 
+// String реализует интерфейс fmt.Stringer представляя список в виде строки.
+func (e *Elem) String() string {
+	var s string
+	s += fmt.Sprintf("%v ", e.Val)
+	return s
+}
+
 // New создаёт список и возвращает указатель на него.
 func New() *List {
 	var l List
@@ -52,10 +59,18 @@ func (l *List) String() string {
 
 // Pop удаляет первый элемент списка.
 func (l *List) Pop() *List {
-	return nil
+	l.root.next = l.root.next.next
+	return l
 }
 
 // Reverse разворачивает список.
 func (l *List) Reverse() *List {
-	return nil
+	el := l.root.next
+	reversed_l := New()
+	for el != l.root {
+		reversed_l.Push(Elem{Val: el.Val})
+		el = el.next
+	}
+	fmt.Println(reversed_l)
+	return reversed_l
 }
