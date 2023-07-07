@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"sort"
 	"strings"
 	"thinknetika_go/lesson2/pkg/crawler"
@@ -15,27 +16,27 @@ func main() {
 	var sFlag = flag.String("s", "", "filter message for crawler")
 	flag.Parse()
 	urls := []string{"https://go.dev", "https://habr.com/"}
-	var depth int8 = 2
+	var depth int = 2
 	var total = []crawler.Document{}
-	var currentDocumentNumber int = 0
+	var docNum int = 0
 
 	s := spider.New()
 	for _, url := range urls {
 		scanResult, err := s.Scan(url, int(depth))
 		if err != nil {
-			fmt.Println(err)
+			log.Fatal(err)
 		}
 
 		for _, v := range scanResult {
 			total = append(total,
 				crawler.Document{
-					ID:    currentDocumentNumber,
+					ID:    docNum,
 					URL:   v.URL,
 					Title: v.Title,
 					Body:  v.Body,
 				},
 			)
-			currentDocumentNumber = currentDocumentNumber + 1
+			docNum = docNum + 1
 		}
 	}
 
