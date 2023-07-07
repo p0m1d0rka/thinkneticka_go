@@ -66,11 +66,19 @@ func (l *List) Pop() *List {
 // Reverse разворачивает список.
 func (l *List) Reverse() *List {
 	el := l.root.next
-	reversed_l := New()
-	for el != l.root {
-		reversed_l.Push(Elem{Val: el.Val})
+	root := l.root.next
+	// el.next, el.prev = el.prev, el.next
+	for i := 0; i < 2; i++ {
+		fmt.Println(el)
 		el = el.next
 	}
-	fmt.Println(reversed_l)
-	return reversed_l
+	for i := 0; i < 2; i++ {
+		fmt.Println(el, root)
+		root.next = el
+		el = el.prev
+
+		root = root.next
+	}
+	// fmt.Println(reversed_l)
+	return l
 }
