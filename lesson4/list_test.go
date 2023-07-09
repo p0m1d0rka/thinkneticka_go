@@ -42,12 +42,15 @@ func TestList_Pop(t *testing.T) {
 
 func TestList_Reverse(t *testing.T) {
 	l := New()
+	l.Push(Elem{Val: 6})
+	l.Push(Elem{Val: 5})
+	l.Push(Elem{Val: 4})
 	l.Push(Elem{Val: 3})
 	l.Push(Elem{Val: 2})
 	l.Push(Elem{Val: 1})
 
 	got := l.Reverse().String()
-	want := "3 2 1"
+	want := "6 5 4 3 2 1"
 	if got != want {
 		t.Fatalf("получили %s, ожидалось %s", got, want)
 	}

@@ -60,25 +60,31 @@ func (l *List) String() string {
 // Pop удаляет первый элемент списка.
 func (l *List) Pop() *List {
 	l.root.next = l.root.next.next
+	l.root.next.prev = l.root
 	return l
 }
 
 // Reverse разворачивает список.
 func (l *List) Reverse() *List {
-	el := l.root.next
-	root := l.root.next
-	// el.next, el.prev = el.prev, el.next
-	for i := 0; i < 2; i++ {
-		fmt.Println(el)
-		el = el.next
-	}
-	for i := 0; i < 2; i++ {
-		fmt.Println(el, root)
-		root.next = el
-		el = el.prev
+	// берем указатели на первый и последний элемент,
+	// меняем значения местами и сдвигаем указатели к центру листа
+	// повторяем lenght/2 раз
 
-		root = root.next
+	head := l.root.next
+	tail := l.root.next
+	lenght := 1
+	for tail.next != l.root {
+		tail = tail.next
+		lenght += 1
 	}
-	// fmt.Println(reversed_l)
+	fmt.Println(head)
+	fmt.Println(tail)
+	fmt.Println(lenght / 2)
+	for i := 0; i < lenght/2; i++ {
+		head.Val, tail.Val = tail.Val, head.Val
+		head = head.next
+		tail = tail.prev
+	}
+
 	return l
 }
