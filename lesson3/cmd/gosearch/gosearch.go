@@ -3,9 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"sort"
-	"strings"
 	"thinknetika_go/lesson2/pkg/crawler"
 	"thinknetika_go/lesson2/pkg/crawler/spider"
 	"thinknetika_go/lesson3/pkg/index"
@@ -24,7 +22,8 @@ func main() {
 	for _, url := range urls {
 		scanResult, err := s.Scan(url, int(depth))
 		if err != nil {
-			log.Fatal(err)
+			fmt.Println(err)
+			continue
 		}
 
 		for _, v := range scanResult {
@@ -41,10 +40,7 @@ func main() {
 	}
 
 	for _, v := range total {
-		index.Indexing(v)
-		if strings.Contains(v.URL, *sFlag) {
-			fmt.Println(v.URL)
-		}
+		index.Add(v)
 	}
 	docIds := index.Index[*sFlag]
 	for _, dId := range docIds {

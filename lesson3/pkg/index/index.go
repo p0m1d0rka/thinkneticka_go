@@ -9,7 +9,7 @@ import (
 
 var Index = make(map[string][]int)
 
-func Indexing(doc crawler.Document) {
+func Add(doc crawler.Document) {
 	title_words := strings.Fields(doc.Title)
 	for _, word := range title_words {
 		Index[word] = append(Index[word], doc.ID)
